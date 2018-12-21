@@ -1,0 +1,37 @@
+﻿@inject MsSQLAdmin.Services.ConnectionService ConnectionService
+@model IEnumerable<MsSQLAdmin.Models.TableListModel>
+@{
+    ViewData["Title"] = "Tables";
+}
+<h2>Tables</h2>
+<p>
+   
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Schema)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Schema)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Name, "Table", new { serveur = ConnectionService.Serveur, database = ConnectionService.Database, table = $"{item.Schema}.{item.Name}" })
+                </td>
+                <td>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
